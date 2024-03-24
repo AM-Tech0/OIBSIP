@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+                }
+        .container {
+            max-width: 300px;
+            margin: 50px auto;
+            background-color: rgb(71, 144, 212); ;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            background-color: rgb(164, 242, 242);
+            cursor: pointer;
+            color:white;
+            border-radius: 9px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color:rgb(103, 233, 233);
+            border-radius: 15px;
+        }
+        button.operator {
+            background-color: #f44336;
+            color: #fff;
+        }
+        button.operator:hover {
+            background-color: #d32f2f;
+        }
+        button.equal {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        button.equal:hover {
+            background-color: #388e3c;
+        }
+        #display {
+            grid-column: span 4;
+            padding: 10px;
+            text-align: right;
+            font-size: 20px;
+            border: none;
+            border-radius: 3px;
+        }
+        .btn{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculator</h2>
+        <input type="text" id="display" readonly>
+        <div class="calculator">
+            <button class="btn" onclick="clearDisplay()">C</button>
+            <button class="btn" onclick="appendToDisplay('(')">()</button>
+            <button class="btn" onclick="backspace()">←</button>
+            <button class="operator btn" onclick="appendToDisplay('/')">/</button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button class="operator" onclick="appendToDisplay('*')">*</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="operator" onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button class="equal" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function backspace() {
+            var displayValue = document.getElementById('display').value;
+            document.getElementById('display').value = displayValue.slice(0, -1);
+        }
+
+        function calculate() {
+            var displayValue = document.getElementById('display').value;
+            try {
+                var result = eval(displayValue);
+                document.getElementById('display').value = result;
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
